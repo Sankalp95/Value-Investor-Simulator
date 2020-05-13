@@ -7,3 +7,8 @@
 .homePage_listItem {
     cursor: pointer;
 }
+
+.equityInformation_Width{
+    width: 70%;
+    margin: 0 auto;
+}
