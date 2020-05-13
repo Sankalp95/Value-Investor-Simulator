@@ -31,7 +31,7 @@ const EquityData = ({highLevelInfo, timeSeriesSortedKeys, timeSeries, metaData})
         {/* Latest Price. */}
         <Grid direction = 'column' style={{display:'flex'}} >
           <Typography gutterBottom variant="subtitle1"> 
-            <strong>Latest Closing Price({highLevelInfo['8. currency']}) </strong>
+            <strong>Latest Closing Price ({highLevelInfo['8. currency']}) </strong>
           </Typography>
           <Typography gutterBottom variant="subtitle1"> 
             $ { Number(timeSeries[timeSeriesSortedKeys[0]]['4. close']) }
@@ -58,7 +58,7 @@ const EquityData = ({highLevelInfo, timeSeriesSortedKeys, timeSeries, metaData})
         {/* Last 30 day average. */}
         <Grid direction = 'column' style={{display:'flex'}} >
           <Typography gutterBottom variant="subtitle1"> 
-            <strong>30 Day Average Closing Price</strong>
+            <strong>Trailing 30 Day Average</strong>
           </Typography>
           <Typography gutterBottom variant="subtitle1"> 
             $ { get30DayAverage(timeSeries, timeSeriesSortedKeys) }

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import SearchBar from './SearchBar.js';
 import EquityInformation from './EquityInformation.js';
+import Overview from './Overview.js';
 import axios from 'axios';
 
 export default class HomePage extends Component{
@@ -26,9 +27,9 @@ export default class HomePage extends Component{
         ticker,
       }
     }).then(response => {
-      // If the API complains that we've reached the limit.
-      
+      // If the API complains that we've reached the limit.      
       if (response.data.Note) return;
+
       this.setState({
         selectedEquity: {
           highLevelInfo: equity,
@@ -44,6 +45,9 @@ export default class HomePage extends Component{
   render() {
     return(
       <div>
+        {/* Overview on what this page is + sign up buttons. */}
+        <Overview />
+
         {/* Search bar and stock selection. */}
         <SearchBar handleStockSelection = {this.handleStockSelection} />
 

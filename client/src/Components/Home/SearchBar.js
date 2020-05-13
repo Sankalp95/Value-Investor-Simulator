@@ -17,11 +17,13 @@ export default class SearchBar extends Component{
     this.state = {
       searchValue: "",
       typingTimeout: null,
-      equities: []
+      equities: [],
+      showingSearch: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.fetchSearch = this.fetchSearch.bind(this);
     this.renderListItems = this.renderListItems.bind(this);
+    this.handleStockSelection = this.handleStockSelection.bind(this);
   };
 
   /**
@@ -36,7 +38,8 @@ export default class SearchBar extends Component{
     if (!event.target.value) {
       this.setState({
         searchValue: "",
-        equities: []
+        equities: [],
+        showingSearch: false,
       });
     } else {
       this.setState({
@@ -60,12 +63,23 @@ export default class SearchBar extends Component{
         let equities = instruments.filter(instrument => instrument['3. type'] === 'Equity');
         this.setState({
           equities,
+          showingSearch: true,
         });
       }
     }).catch(err => {
       console.log('ERR' + err);
     });
   };
+
+  /**
+   * Handles onClick.
+   */
+  handleStockSelection(equity) {
+    this.setState({
+      showingSearch: false,
+    });
+    this.props.handleStockSelection(equity);
+  }
 
   /**
    * Renders the list items for the equities searched.
@@ -75,9 +89,10 @@ export default class SearchBar extends Component{
       return this.state.equities.map(equity => {
         return (
           <ListItem 
-            onClick = {() => this.props.handleStockSelection(equity)} 
+            onClick = {() => this.handleStockSelection(equity)} 
             className = 'homePage_listItem'
             key = {`${equity['1. symbol']}`} 
+            style={{display:'flex', justifyContent:'space-around'}}
           >
             <ListItemText 
               primary={`${equity['1. symbol']}`}              
@@ -91,13 +106,14 @@ export default class SearchBar extends Component{
           </ListItem>
         );
       });
-    }
+    };
   };
 
   /**
    * Main rendering method.
    */
   render() {
+    const cssForGridResults = (this.state.showingSearch) ? 'searchResultsGrid' : 'hidden';
     return(
       <div className="homePage_searchButtonContainer">
         <div>
@@ -105,7 +121,7 @@ export default class SearchBar extends Component{
             id="standard-full-width"
             placeholder="Search for a ticker..."
             fullWidth
-            margin="normal"
+            // margin="normal"
             onChange={this.handleChange}
             InputLabelProps={{
               shrink: true,
@@ -114,14 +130,14 @@ export default class SearchBar extends Component{
             variant="outlined"
           />
         </div>
-        <Grid>
+        <Grid className = {cssForGridResults}>
           <div>
-            <List>                
+            <List className = 'searchResults'>                
               {this.renderListItems()}
             </List>
           </div>
         </Grid>        
       </div>
     );
-  }
+  };
 };

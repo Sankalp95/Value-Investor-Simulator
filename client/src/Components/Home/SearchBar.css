@@ -1,14 +1,31 @@
 .homePage_searchButtonContainer {
-    width: 55%;
-    margin: 0 auto;
-    font-size: 1.5em;
+  width: 55%;
+  margin: 2em auto;
+  font-size: 1.5em;
 }
 
-.homePage_listItem {
-    cursor: pointer;
+.homePage_listItem:hover {
+  background-color: #D0D0D0;
+  transition:all ease .09s;
+  cursor: pointer;
 }
 
 .equityInformation_Width{
-    width: 70%;
-    margin: 0 auto;
+  width: 70%;
+  margin: 2em auto;
+}
+
+.searchResultsGrid {
+  border-bottom: 1px solid rgb(196, 196, 196);
+  border-left: 1px solid rgb(196, 196, 196);
+  border-right: 1px solid rgb(196, 196, 196);
+  border-radius: 5px;
+  background-color: #fcf0e5;
+  position: absolute;
+  width: 54%;
+  z-index: 2;
+}
+
+.hidden {
+  display: none;
 }

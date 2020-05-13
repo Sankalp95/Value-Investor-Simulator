@@ -1,4 +1,53 @@
 .App {
   margin: 1rem;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;  
+}
+
+.overviewContainer {
+  text-align: center;
+  position: relative;
+}
+
+.bayStreetPic {
+  width: 98vw;
+  opacity: 0.4;
+}
+
+.title {
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: 700;
+  font-size: 3rem;
+  color: #181818;
+  font-style: italic;
+}
+
+.overviewTextContainer {
+  text-align: center;
+  margin: 2em auto;
+  font-family: "SF Pro Display","SF Pro Icons","Helvetica Neue","Helvetica","Arial",sans-serif;  
+  width: 70%;
+}
+
+.mainTitleText {
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+.overviewText {
+  font-size: 1.2rem;
+}
+
+.buttonContainer {
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+}
+
+.buttonMainScreen + .buttonMainScreen {
+  margin-left: 3em;
 }
