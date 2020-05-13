@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import {hot} from "react-hot-loader";
+
+import HomePage from './Components/Home/HomePage.js';
 import "./app.css";
 
 class App extends Component{
   render(){
     return(
-      <div className="App">
-        <h1> Hello, World! </h1>
-      </div>
+      <HomePage />
     );
   }
 }
