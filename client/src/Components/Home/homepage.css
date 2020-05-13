@@ -1,5 +1,9 @@
 .homePage_searchButtonContainer {
-    width: 70%;
+    width: 55%;
     margin: 0 auto;
     font-size: 1.5em;
+}
+
+.homePage_listItem {
+    cursor: pointer;
 }

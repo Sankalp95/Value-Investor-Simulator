@@ -7,7 +7,7 @@ const axios = require('axios');
  */
 router.get('/searchForStock/', (req, res) => {
     // Search input should be in the request body.
-    searchInput = req.body.ticker;
+    searchInput = req.query.ticker;
 
     // Make the external API call to fetch the results of the search.
     axios.get('https://www.alphavantage.co/query', {
