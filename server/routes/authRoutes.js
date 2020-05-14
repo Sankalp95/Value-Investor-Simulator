@@ -8,7 +8,7 @@ const passport = require('passport');
  */
 router.post('/signup', passport.authenticate('signup', { session : false }), (req, res, next) => {
   res.json({ 
-    message : 'Signup successful',
+    success : true,
     user : req.user 
   });
 });
@@ -17,7 +17,10 @@ router.post('/signup', passport.authenticate('signup', { session : false }), (re
  * Login 
  */
 router.post('/login', passport.authenticate('login', { session: false }), (req, res, next) => {
-  res.json(req.user);
+  res.json({
+    success: true,
+    user: req.user
+  });
 });
 
 module.exports = router;

@@ -2,6 +2,25 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
+// Stock Schema.
+let stockSchema = new mongoose.Schema({
+  ticker: {
+    type: String,
+    required: true,
+    minlength: 1,
+    maxlength: 5,
+    unique: true
+  },
+  priceAtPurchase: {
+    type: mongoose.Schema.Types.Decimal128,
+    required: true,
+  },
+  quantityPurchased: {
+    type: Number,
+    required: true,
+  }
+});
+
 // Base model for a user.
 let userSchema = new mongoose.Schema({
   email: {
@@ -17,6 +36,10 @@ let userSchema = new mongoose.Schema({
     minlength: 5,
     maxlength: 1024
   },
+  moneyRemaining: {
+    type: mongoose.Schema.Types.Decimal128,
+  },
+  stocks: [stockSchema]
 });
 
 // Creating the hash of a password.
@@ -38,4 +61,6 @@ userSchema.methods.isValidPassword = function(passwordToVerify, callback) {
 
 // Add user schema to mongo.
 const User = mongoose.model("User", userSchema);
+const Stock = mongoose.model("Stock", stockSchema);
 exports.User = User;
+exports.Stock = Stock;
