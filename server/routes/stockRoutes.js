@@ -5,7 +5,7 @@ const axios = require('axios');
 /**
  * Used to search for a particular company. 
  */
-router.get('/stock/', (req, res) => {
+router.get('/', (req, res) => {
   // Search input should be in the request body.
   searchInput = req.query.ticker;
 
@@ -26,7 +26,7 @@ router.get('/stock/', (req, res) => {
 /**
  * Used to get the daily prices of a stock.
  */
-router.get('/stockPrice/', (req, res) => {
+router.get('/timeSeriesDaily/', (req, res) => {
   // Search input should be in the request body.
   ticker = req.query.ticker;
 

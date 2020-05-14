@@ -16,13 +16,32 @@ export default class HomePage extends Component{
       this.fetchStockPrices = this.fetchStockPrices.bind(this);
   };
 
+  /**
+   * Handler when the user clicks on a new stock from the dropdown.
+   */
   handleStockSelection(equity) {
     if (!equity) return;
     this.fetchStockPrices(equity, equity['1. symbol']);
   };
 
+  /**
+   * Handler when the user attempts to Google login.
+   * Makes the async call to login.
+   */
+  handleLogin() {
+    axios.get('http://localhost:8080/api/auth/google')
+    .then(response => {
+      console.log(response);
+    }).catch(err => {
+      console.log(err);
+    });
+  };
+
+  /**
+   * Make the async call to get the stock prices.
+   */
   fetchStockPrices(equity, ticker) {
-    axios.get('http://localhost:8080/api/stocks/stockPrice/', {
+    axios.get('http://localhost:8080/api/stocks/timeSeriesDaily/', {
       params: {
         ticker,
       }
@@ -46,7 +65,7 @@ export default class HomePage extends Component{
     return(
       <div>
         {/* Overview on what this page is + sign up buttons. */}
-        <Overview />
+        <Overview login = {this.handleLogin}/>
 
         {/* Search bar and stock selection. */}
         <SearchBar handleStockSelection = {this.handleStockSelection} />

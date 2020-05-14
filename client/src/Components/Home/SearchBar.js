@@ -53,7 +53,7 @@ export default class SearchBar extends Component{
    * Make the async call to get the dropdown values.
    */
   fetchSearch() {
-    axios.get('http://localhost:8080/api/stocks/stock/', {
+    axios.get('http://localhost:8080/api/stocks/', {
       params: {
         ticker:this.state.searchValue
       }

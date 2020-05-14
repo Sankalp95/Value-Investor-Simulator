@@ -6,11 +6,17 @@
 .overviewContainer {
   text-align: center;
   position: relative;
+  background-color: black;
 }
 
 .bayStreetPic {
-  width: 98vw;
+  width: 98.5vw;
   opacity: 0.4;
+  max-height: 100vh;
+}
+
+body {
+  margin: 0;
 }
 
 .title {
@@ -20,7 +26,7 @@
   transform: translate(-50%, -50%);
   font-weight: 700;
   font-size: 3rem;
-  color: #181818;
+  color: white;
   font-style: italic;
 }
 
