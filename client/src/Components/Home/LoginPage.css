@@ -1,0 +1,13 @@
+.loginContainer {
+  margin: 2em auto;
+  width: 45%;
+}
+
+.loginField_item + .loginField_item{
+  margin-top: 2em;
+}
+
+.loginButton {
+  width: 5%;
+  margin-top: 2em !important;
+}

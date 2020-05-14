@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import SearchBar from './SearchBar.js';
-import EquityInformation from './EquityInformation.js';
 import Overview from './Overview.js';
+import LoginPage from './LoginPage.js';
+import UserInformation from './UserInformation.js';
 import axios from 'axios';
 
 export default class HomePage extends Component{
@@ -9,69 +9,61 @@ export default class HomePage extends Component{
       super();
       this.state = {
         selectedEquity: null,
+        showRegister: false,
+        showLogin: false,
+        loggedInUserCreds: null,
       };
 
       // Fixing the context.
-      this.handleStockSelection = this.handleStockSelection.bind(this);
-      this.fetchStockPrices = this.fetchStockPrices.bind(this);
+      this.handleLogin = this.handleLogin.bind(this);
+      this.submitLogin = this.submitLogin.bind(this);
   };
 
   /**
-   * Handler when the user clicks on a new stock from the dropdown.
+   * Handler when the user attempts to login.
    */
-  handleStockSelection(equity) {
-    if (!equity) return;
-    this.fetchStockPrices(equity, equity['1. symbol']);
-  };
-
-  /**
-   * Handler when the user attempts to Google login.
-   * Makes the async call to login.
-   */
-  handleLogin() {
-    axios.get('http://localhost:8080/api/auth/google')
+  submitLogin(name, email, password) {
+    let requestBody = {
+      name,
+      email,
+      password
+    };
+    axios.post('http://localhost:8080/api/auth/login', requestBody)
     .then(response => {
-      console.log(response);
+      this.setState({
+        loggedInUserCreds: response.data,
+        showLogin: false
+      });
     }).catch(err => {
       console.log(err);
     });
   };
 
   /**
-   * Make the async call to get the stock prices.
+   * Shows the modal for the login window.
    */
-  fetchStockPrices(equity, ticker) {
-    axios.get('http://localhost:8080/api/stocks/timeSeriesDaily/', {
-      params: {
-        ticker,
-      }
-    }).then(response => {
-      // If the API complains that we've reached the limit.      
-      if (response.data.Note) return;
-
-      this.setState({
-        selectedEquity: {
-          highLevelInfo: equity,
-          metaData: response.data['Meta Data'],
-          timeSeries: response.data['Time Series (Daily)'],
-        },
-      });
-    }).catch(err => {
-      console.log('ERR' + err);
+  handleLogin() {
+    this.setState({
+      showLogin: !this.state.showLogin
     });
   };
-  
+
+  /***
+   * Handler when the user attempts to sign up.
+   */
+  handleSignup() { };
+
   render() {
     return(
       <div>
         {/* Overview on what this page is + sign up buttons. */}
-        <Overview login = {this.handleLogin}/>
+        <Overview handleLogin = {this.handleLogin} handleSignup = {this.handleSignup} />
 
-        {/* Search bar and stock selection. */}
-        <SearchBar handleStockSelection = {this.handleStockSelection} />
+        {/* Login Page */}
+        {this.state.showLogin && !this.state.loggedInUserCreds && <LoginPage submitLogin = {this.submitLogin} />}
 
-        {/* Information for a particular stock. */}
-        <EquityInformation selectedEquity = {this.state.selectedEquity} />
+        {/* User Information page. */}
+        {this.state.loggedInUserCreds && <UserInformation userInfo = {this.state.loggedInUserCreds}></UserInformation>}
       </div>
     )
   };

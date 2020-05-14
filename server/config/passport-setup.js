@@ -44,7 +44,7 @@ passport.use('login', new LocalStrategy({
   User.findOne({
       email: email
   }, (err, user) => {
-      if (err) {
+      if (err) {          
           return done(err);
       } if (!user) {
           const error = new Error("Incorrect email or password");

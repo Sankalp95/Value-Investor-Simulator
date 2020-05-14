@@ -1,0 +1,8 @@
+.userInfoContainer {
+    margin: 2em auto;
+}
+
+.userInfoWelcomeText {
+    margin-left: 1em !important;
+    font-weight: 600;
+}

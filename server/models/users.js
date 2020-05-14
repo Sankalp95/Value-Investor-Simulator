@@ -11,12 +11,12 @@ let userSchema = new mongoose.Schema({
     maxlength: 255,
     unique: true
   },
-    password: {
+  password: {
     type: String,
     required: true,
     minlength: 5,
     maxlength: 1024
-  }
+  },
 });
 
 // Creating the hash of a password.

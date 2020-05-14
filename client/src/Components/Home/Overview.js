@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Button from '@material-ui/core/Button';
 import { Typography } from '@material-ui/core';
 
-const Overview = ({login}) => {
+const Overview = ({ handleLogin, handleSignup }) => {
   return(
     <div>
       {/* Background image of Bay Street, Toronto. */}
@@ -12,8 +12,11 @@ const Overview = ({login}) => {
             The Ben Graham Value Investing Tool
         </Typography>
         <div className = 'buttonContainer'>
-          <Button variant="contained" color="secondary" className = 'buttonMainScreen' onClick = {login}>
-            Google Login
+          <Button variant="contained" color="secondary" className = 'buttonMainScreen' onClick = {handleLogin}>
+            Login
+          </Button>
+          <Button variant="contained" color="primary" className = 'buttonMainScreen' onClick = {handleSignup}>
+            Signup
           </Button>
         </div>
       </div>

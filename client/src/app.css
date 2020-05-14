@@ -12,7 +12,7 @@
 .bayStreetPic {
   width: 98.5vw;
   opacity: 0.4;
-  max-height: 100vh;
+  max-height: 99.4vh;
 }
 
 body {
@@ -32,7 +32,7 @@ body {
 
 .overviewTextContainer {
   text-align: center;
-  margin: 2em auto;
+  /* margin: 2em auto 0em auto; */
   font-family: "SF Pro Display","SF Pro Icons","Helvetica Neue","Helvetica","Arial",sans-serif;  
   width: 70%;
 }
