@@ -2,19 +2,25 @@ import React, { Component } from "react";
 import SearchBar from './SearchBar.js';
 import EquityInformation from './EquityInformation.js';
 import Typography from '@material-ui/core/Typography';
+import StockTable from './StockTable.js';
 import axios from 'axios';
 import './UserInformation.css';
 
 class UserInformation extends Component {
-  constructor(props) {
+  constructor(props) {    
     super(props);
     this.state = {
-
+      accessToken: this.props.userInfo.user.token,
+      userStocks: null,
     };
     this.handleStockSelection = this.handleStockSelection.bind(this);
     this.fetchStockPrices = this.fetchStockPrices.bind(this);
+    this.fetchUserInformation = this.fetchUserInformation.bind(this);    
   }
 
+  componentDidMount() {
+    this.fetchUserInformation();
+  }
   /**
    * Handler when the user clicks on a new stock from the dropdown.
    */
@@ -47,12 +53,32 @@ class UserInformation extends Component {
     });
   };
 
+  /**
+   * Get the user information.
+   */
+  fetchUserInformation() {
+    axios.get('http://localhost:8080/api/users/profile/', {
+      params: {
+        secret_token: this.state.accessToken
+      }
+    }).then(res => {
+      if (res.data.success) {
+        this.setState({
+          userStocks: res.data.user.stocks
+        });
+      }
+    }).catch(err => {
+      console.log(err);
+    });
+  };
+
   render() {
     return(
       <div className = 'userInfoContainer'>
           <Typography gutterBottom variant="subtitle1" className = 'userInfoWelcomeText' fontWeight = '600'> 
-            {this.props.userInfo.email} 
+            {this.props.userInfo.user.email} 
           </Typography>
+          <StockTable stocks = {this.state.userStocks} />
           <SearchBar handleStockSelection = {this.handleStockSelection} />
           <EquityInformation selectedEquity = {this.state.selectedEquity} />
       </div>

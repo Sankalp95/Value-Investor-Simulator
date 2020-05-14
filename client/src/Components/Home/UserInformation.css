@@ -6,3 +6,8 @@
     margin-left: 1em !important;
     font-weight: 600;
 }
+
+.stockTableContainer{
+    margin: 0.5em auto;
+    width: 30%;
+}

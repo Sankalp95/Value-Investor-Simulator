@@ -15,6 +15,10 @@ let stockSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.Decimal128,
     required: true,
   },
+  currentPrice: {
+    type: mongoose.Schema.Types.Decimal128,
+    required: false,
+  },
   quantityPurchased: {
     type: Number,
     required: true,

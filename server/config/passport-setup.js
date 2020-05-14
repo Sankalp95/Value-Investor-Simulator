@@ -46,12 +46,12 @@ passport.use('login', new LocalStrategy({
   }, (err, user) => {
       if (err) {          
           return done(err);
-      } if (!user) {
+      } else if (!user) {
           const error = new Error("Incorrect email or password");
           error.name = "IncorrectCredentialsError";
           return done(error);
-      } 
-      user.isValidPassword(password, (err, res) => {
+      } else {
+        user.isValidPassword(password, (err, res) => {
           if (!res || err) {
               const error = new Error();
               error.name = "IncorrectCredentialsError";            
@@ -66,7 +66,8 @@ passport.use('login', new LocalStrategy({
             token,
           };
           return done(null, responsePayload);
-      });
+        });
+      }
     });
   }
 ));
