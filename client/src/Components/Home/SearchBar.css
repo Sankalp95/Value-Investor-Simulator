@@ -1,6 +1,6 @@
 .homePage_searchButtonContainer {
   width: 55%;
-  margin: 1em auto;
+  margin: 2em auto 1em auto;
   font-size: 1.5em;
 }
 
@@ -28,4 +28,8 @@
 
 .hidden {
   display: none;
+}
+
+.buyStockButton {
+  margin-top: 1em !important;
 }

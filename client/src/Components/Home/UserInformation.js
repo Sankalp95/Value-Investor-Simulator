@@ -75,8 +75,8 @@ class UserInformation extends Component {
   render() {
     return(
       <div className = 'userInfoContainer'>
-          <Typography gutterBottom variant="subtitle1" className = 'userInfoWelcomeText' fontWeight = '600'> 
-            {this.props.userInfo.user.email} 
+          <Typography gutterBottom variant="h5" className = 'userInfoWelcomeText' fontWeight = '600'> 
+            Your Portfolio.
           </Typography>
           <StockTable stocks = {this.state.userStocks} />
           <SearchBar handleStockSelection = {this.handleStockSelection} />

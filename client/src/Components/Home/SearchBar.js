@@ -5,6 +5,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import axios from 'axios';
+import Button from '@material-ui/core/Button';
 
 import './SearchBar.css';
 
@@ -116,20 +117,25 @@ export default class SearchBar extends Component{
     const cssForGridResults = (this.state.showingSearch) ? 'searchResultsGrid' : 'hidden';
     return(
       <div className="homePage_searchButtonContainer">
-        <div>
-          <TextField
-            id="standard-full-width"
-            placeholder="Search for a ticker..."
-            fullWidth
-            // margin="normal"
-            onChange={this.handleChange}
-            InputLabelProps={{
-              shrink: true,
-            }}
-            inputProps={{style: {fontSize: 25}}}
-            variant="outlined"
-          />
-        </div>
+        <Grid>
+          <div>
+            <TextField
+              id="standard-full-width"
+              placeholder="Search for a ticker..."
+              fullWidth
+              // margin="normal"
+              onChange={this.handleChange}
+              InputLabelProps={{
+                shrink: true,
+              }}
+              inputProps={{style: {fontSize: 25}}}
+              variant="outlined"
+            />
+          </div>
+          <Button variant="contained" color="primary" className = 'buyStockButton'>
+            Buy Stock
+          </Button>
+        </Grid>
         <Grid className = {cssForGridResults}>
           <div>
             <List className = 'searchResults'>                
