@@ -26,6 +26,7 @@ export default class SearchBar extends Component{
     this.renderListItems = this.renderListItems.bind(this);
     this.handleStockSelection = this.handleStockSelection.bind(this);
     this.handlequantityToBuy = this.handlequantityToBuy.bind(this);
+    this.stockPurchase = this.stockPurchase.bind(this);
   };
 
   /**
@@ -122,6 +123,16 @@ export default class SearchBar extends Component{
   };
 
   /**
+   * Handler for buying a stock.
+   */
+  stockPurchase(quantity) {
+    this.setState({
+      quantityToBuy: ""
+    });
+    this.props.stockPurchase(quantity);
+  };
+
+  /**
    * Main rendering method.
    */
   render() {
@@ -146,7 +157,7 @@ export default class SearchBar extends Component{
             variant="contained" 
             color="primary" 
             className = 'buyStockButton'
-            onClick = {() => this.props.stockPurchase(this.state.quantityToBuy)}
+            onClick = {() => this.stockPurchase(this.state.quantityToBuy)}
           >
             Buy Stock
           </Button>
