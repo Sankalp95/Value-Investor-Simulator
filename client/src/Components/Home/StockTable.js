@@ -26,7 +26,7 @@ const StockTable = ({ stocks }) => {
         <TableContainer>
           <TableRow>
             <TableCell>Ticker</TableCell>
-            <TableCell align="right">Price At Purchase</TableCell>
+            <TableCell align="right">Purchase Price </TableCell>
             <TableCell align="right">Quantity Purchased</TableCell>
             <TableCell align="right">Total Cost</TableCell>
           </TableRow>

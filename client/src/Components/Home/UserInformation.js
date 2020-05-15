@@ -127,6 +127,9 @@ class UserInformation extends Component {
             Remaining Balance: ${Number(this.state.balance).toFixed(2)}
           </Typography>
           <StockTable stocks = {this.state.userStocks} />
+          <Typography gutterBottom variant="h5" className = 'userInfoWelcomeText' fontWeight = '600'> 
+            Buy / Sell Stocks
+          </Typography>
           <SearchBar handleStockSelection = {this.handleStockSelection} stockPurchase = {this.stockPurchase}/>
           <EquityInformation selectedEquity = {this.state.selectedEquity} />
       </div>

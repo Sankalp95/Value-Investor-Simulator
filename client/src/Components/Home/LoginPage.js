@@ -35,12 +35,6 @@ class LoginPage extends Component {
           <TextField 
             id="standard-basic" 
             className = 'loginField_item' 
-            label="Name" 
-            onChange = {this.nameChange} 
-          />
-          <TextField 
-            id="standard-basic" 
-            className = 'loginField_item' 
             label="Email Address" 
             onChange = {this.emailChange} 
           />
