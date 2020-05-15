@@ -31,5 +31,10 @@
 }
 
 .buyStockButton {
-  margin-top: 1em !important;
+  margin-top: 1.5em !important;
+}
+
+.quantityStockBuy {
+  margin-left: 1em !important;
+  margin-top: 0.75em !important;
 }

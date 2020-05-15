@@ -12,10 +12,13 @@ class UserInformation extends Component {
     this.state = {
       accessToken: this.props.userInfo.user.token,
       userStocks: null,
+      selectedEquity: null,
+      balance: null,
     };
     this.handleStockSelection = this.handleStockSelection.bind(this);
     this.fetchStockPrices = this.fetchStockPrices.bind(this);
-    this.fetchUserInformation = this.fetchUserInformation.bind(this);    
+    this.fetchUserInformation = this.fetchUserInformation.bind(this);  
+    this.stockPurchase = this.stockPurchase.bind(this);  
   }
 
   componentDidMount() {
@@ -64,8 +67,53 @@ class UserInformation extends Component {
     }).then(res => {
       if (res.data.success) {
         this.setState({
-          userStocks: res.data.user.stocks
+          userStocks: res.data.user.stocks,
+          balance: res.data.user.balance.$numberDecimal,
         });
+      }
+    }).catch(err => {
+      console.log(err);
+    });
+  };
+
+  /**
+   * Saving new stock.
+   */
+  stockPurchase(quantityPurchased) {
+    // Has a stock been chosen?
+    if (!this.state.selectedEquity) return;
+    if (!quantityPurchased || quantityPurchased <= 0) return;
+
+    // Create the request body.
+    const timeSeries = this.state.selectedEquity.timeSeries;
+    const timeSeriesSortedKeys = Object.keys(timeSeries).sort().reverse();
+    const priceAtPurchase = timeSeries[timeSeriesSortedKeys[0]]['4. close'];
+
+    // Calculate the new balance. Check that it's not negative.
+    let newBalance = this.state.balance - (quantityPurchased * priceAtPurchase);
+    if (newBalance < 0) return;
+
+    // Request body.
+    const requestBody = {
+      ticker: this.state.selectedEquity.highLevelInfo['1. symbol'],
+      quantityPurchased,
+      priceAtPurchase,
+      balance: newBalance
+    };
+
+    // Create the request query parameters - for the access token.
+    const queryParams = {
+      params: {
+        secret_token: this.state.accessToken
+      }
+    };
+
+    // Make the POST request.
+    // axios.post(url[, data[, config]])
+    axios.post('http://localhost:8080/api/users/stock/', requestBody, queryParams)
+    .then(response => {
+      if (response.data.success) {
+        this.fetchUserInformation();
       }
     }).catch(err => {
       console.log(err);
@@ -76,10 +124,10 @@ class UserInformation extends Component {
     return(
       <div className = 'userInfoContainer'>
           <Typography gutterBottom variant="h5" className = 'userInfoWelcomeText' fontWeight = '600'> 
-            Your Portfolio.
+            Remaining Balance: ${Number(this.state.balance).toFixed(2)}
           </Typography>
           <StockTable stocks = {this.state.userStocks} />
-          <SearchBar handleStockSelection = {this.handleStockSelection} />
+          <SearchBar handleStockSelection = {this.handleStockSelection} stockPurchase = {this.stockPurchase}/>
           <EquityInformation selectedEquity = {this.state.selectedEquity} />
       </div>
     );

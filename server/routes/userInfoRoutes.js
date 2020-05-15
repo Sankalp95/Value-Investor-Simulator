@@ -27,18 +27,22 @@ router.get('/profile', (req, res, next) => {
 router.post('/stock', (req, res, next) => {
   let filter = { email: req.user.email };
 
+  // Create new stock.
   stock = new Stock();
   stock.ticker = req.body.ticker;
   stock.priceAtPurchase = req.body.priceAtPurchase;
   stock.quantityPurchased = req.body.quantityPurchased;
-  let doc = { stocks: [stock] }
-  User.updateOne(filter, doc, (err, updateRes) => {
+  balance = req.body.balance;
+
+  // https://stackoverflow.com/questions/33049707/push-items-into-mongo-array-via-mongoose
+  let newStockObj = { $push: { stocks: [stock] }, balance, }
+  User.updateOne(filter, newStockObj, (err, updateRes) => {
     if (err) {
       res.status(400).json({
         success: false,
         error: err,
         nModifed: updateRes.nModifed,
-      });    
+      });
     } else {
       res.status(200).json({
         success: true,

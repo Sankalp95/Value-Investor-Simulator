@@ -32,9 +32,26 @@ class LoginPage extends Component {
     return(
       <div className = 'loginContainer'>
         <Grid direction = 'column' style={{display:'flex'}} >
-          <TextField id="standard-basic" className = 'loginField_item' label="Name" onChange = {this.nameChange} />
-          <TextField id="standard-basic" className = 'loginField_item' label="Email Address" onChange = {this.emailChange} />
-          <TextField id="standard-basic" className = 'loginField_item' label="Password" onChange = {this.passwordChange} />
+          <TextField 
+            id="standard-basic" 
+            className = 'loginField_item' 
+            label="Name" 
+            onChange = {this.nameChange} 
+          />
+          <TextField 
+            id="standard-basic" 
+            className = 'loginField_item' 
+            label="Email Address" 
+            onChange = {this.emailChange} 
+          />
+          <TextField 
+            id="standard-password-input" 
+            className = 'loginField_item' 
+            label="Password"
+            onChange = {this.passwordChange}
+            type="password"
+            autoComplete="current-password"
+          />
           <Button 
             variant="contained" 
             color="primary" 

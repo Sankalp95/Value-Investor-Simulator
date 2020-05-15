@@ -9,6 +9,7 @@ const jwt = require('jsonwebtoken');
 const JWTstrategy = require('passport-jwt').Strategy;
 const ExtractJWT = require('passport-jwt').ExtractJwt;
 const secretOrKey = 'top_secret';
+const startingAmount = 100000; // 100k.
 
 /**
  * Middleware for signup.
@@ -22,6 +23,7 @@ passport.use('signup', new LocalStrategy({
     const user = new User();
     user.email = email || "";
     user.password = password || "";
+    user.balance = startingAmount;
     user.save(err => {
         if (err) {
           return done(err);

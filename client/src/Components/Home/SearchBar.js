@@ -25,6 +25,7 @@ export default class SearchBar extends Component{
     this.fetchSearch = this.fetchSearch.bind(this);
     this.renderListItems = this.renderListItems.bind(this);
     this.handleStockSelection = this.handleStockSelection.bind(this);
+    this.handlequantityToBuy = this.handlequantityToBuy.bind(this);
   };
 
   /**
@@ -41,6 +42,7 @@ export default class SearchBar extends Component{
         searchValue: "",
         equities: [],
         showingSearch: false,
+        quantityToBuy: 0
       });
     } else {
       this.setState({
@@ -83,6 +85,15 @@ export default class SearchBar extends Component{
   }
 
   /**
+   * Update the state's quantityToBuy property. Controlled component.
+   */
+  handlequantityToBuy(event) {
+    this.setState({
+      quantityToBuy: event.target.value,
+    });
+  }
+
+  /**
    * Renders the list items for the equities searched.
    */
   renderListItems() {
@@ -116,25 +127,35 @@ export default class SearchBar extends Component{
   render() {
     const cssForGridResults = (this.state.showingSearch) ? 'searchResultsGrid' : 'hidden';
     return(
-      <div className="homePage_searchButtonContainer">
-        <Grid>
-          <div>
-            <TextField
-              id="standard-full-width"
-              placeholder="Search for a ticker..."
-              fullWidth
-              // margin="normal"
-              onChange={this.handleChange}
-              InputLabelProps={{
-                shrink: true,
-              }}
-              inputProps={{style: {fontSize: 25}}}
-              variant="outlined"
-            />
-          </div>
-          <Button variant="contained" color="primary" className = 'buyStockButton'>
+      <div className="homePage_searchButtonContainer">        
+        <div>
+          <TextField
+            id="standard-full-width"
+            placeholder="Search for a ticker..."
+            fullWidth
+            onChange={this.handleChange}
+            InputLabelProps={{
+              shrink: true,
+            }}
+            inputProps={{style: {fontSize: 25}}}
+            variant="outlined"
+          />
+        </div>
+        <Grid style={{display:'flex'}}>
+          <Button 
+            variant="contained" 
+            color="primary" 
+            className = 'buyStockButton'
+            onClick = {() => this.props.stockPurchase(this.state.quantityToBuy)}
+          >
             Buy Stock
           </Button>
+          <TextField 
+            id="standard-basic" 
+            label="Quantity to Buy" 
+            className = 'quantityStockBuy' 
+            onChange = {this.handlequantityToBuy} 
+          />
         </Grid>
         <Grid className = {cssForGridResults}>
           <div>

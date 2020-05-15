@@ -40,7 +40,7 @@ let userSchema = new mongoose.Schema({
     minlength: 5,
     maxlength: 1024
   },
-  moneyRemaining: {
+  balance: {
     type: mongoose.Schema.Types.Decimal128,
   },
   stocks: [stockSchema]
