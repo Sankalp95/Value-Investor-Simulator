@@ -30,18 +30,16 @@ const StockTable = ({ stocks }) => {
             <TableCell align="right">Quantity Purchased</TableCell>
             <TableCell align="right">Total Cost</TableCell>
           </TableRow>
-          {
-            stocks && stocks.map(stock => {
+          {stocks && stocks.map(stock => {
               return(
                 <TableRow key = {stock.ticker}>
                   <TableCell align="right">{stock.ticker}</TableCell>
-                  <TableCell align="right">${stock.priceAtPurchase.$numberDecimal}</TableCell>
+                  <TableCell align="right">${Number(stock.priceAtPurchase.$numberDecimal).toFixed(2)}</TableCell>
                   <TableCell align="right">{stock.quantityPurchased}</TableCell>
                   <TableCell align="right">${stock.totalCost} </TableCell>
                 </TableRow>
-              )
-            })
-          }
+              );
+            })}
         </TableContainer>
         <PieChart data= {createPieChartData(stocks)} />
       </Grid>
